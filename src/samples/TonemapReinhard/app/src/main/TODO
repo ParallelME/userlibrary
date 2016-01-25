@@ -1,0 +1,21 @@
+Java Implementation
+===================
+-> Dando Out of Memory no meu celular, mas não no emulador
+    - Provavelmente vamos ter que arranjar um jeito de aumentar a memória
+        disponível, já que uma imagem 250x250 funciona, mas uma 400x600 não.
+-> Algoritmo sem as operações opcionais não é o suficiente para melhorar a
+    qualidade da imagem. Ele a modifica, mas não melhora ela como um todo.
+    - Teremos que implementar as tarefas opcionais do algoritmo. Talvez ler
+        o paper para ver o que realmente é necessário?
+
+RenderScript Implementation
+===========================
+-> Existem duas funções que dependem de um cálculo que utiliza TODOS os pixels
+    da imagem. Esse cálculo não pode ser feito no renderscript pois necessitaria
+    de um mutex. Porém, para fazê-lo em Java precisaríamos modificar os dados
+    da Allocation que contém a imagem em espaço Yxy. Se for possível modificar a
+    Allocation diretamente, problema resolvido. Porém, caso não for possível,
+    provavelmente precisaremos convertê-la para uma array de doubles e fazer o
+    cálculo em Java baseado nessa array. O problema é, não é possível converter
+    uma Allocation para uma array de doubles. Precisamos, portanto, achar outro
+    método para fazer os cálculos de log_average() e get_max_value().

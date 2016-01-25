@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ImageLoader</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="run_options">
+        <item>Java</item>
+        <item>Java Flat</item>
+        <item>Java Parallel</item>
+        <item>RenderScript</item>
+    </string-array>
+</resources>

@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">TonemapReinhard</string>
+    <string name="text_image_select">Image:</string>
+    <string name="text_run_with">Run with:</string>
+    <string name="text_run_count">Run count:</string>
+    <string name="text_key_value">Key:</string>
+    <string name="text_gamma_correction">Gamma:</string>
+    <string name="button_tonemap">Tonemap</string>
+    <string name="button_reset">Reset</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="image_files">
+        <item>Clifton Bridge</item>
+        <item>Clock Building</item>
+        <item>Crowfoot</item>
+        <item>Lake Tahoe</item>
+        <item>Tintern Abbey</item>
+    </string-array>
+    <string-array name="run_options">
+        <item>Java</item>
+        <item>RenderScript</item>
+        <item>Collection</item>
+    </string-array>
+    <string-array name="run_count">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>30</item>
+        <item>50</item>
+        <item>67</item>
+    </string-array>
+</resources>
