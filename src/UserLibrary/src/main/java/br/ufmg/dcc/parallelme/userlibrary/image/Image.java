@@ -9,6 +9,7 @@
 
 package br.ufmg.dcc.parallelme.userlibrary.image;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
@@ -22,10 +23,23 @@ import br.ufmg.dcc.parallelme.userlibrary.Iterable;
  * @version 0.1
  */
 public class Image implements Iterable<Pixel> {
-    private Bitmap bitmap = null;
+    final private Bitmap bitmap;
+    final private Resources res;
+    final private int resourceId;
+    final private ImageType imageType;
 
     public Image(Bitmap bitmap) {
         this.bitmap = bitmap;
+        this.res = null;
+        this.resourceId = -1;
+        this.imageType = ImageType.Bitmap.Bitmap;
+    }
+
+    public Image(Resources res, int resourceId, ImageType imageType) {
+        this.bitmap = null;
+        this.res = res;
+        this.resourceId = resourceId;
+        this.imageType = imageType;
     }
 
     /**

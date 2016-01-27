@@ -4,7 +4,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "22.0.1"
     defaultConfig {
-        applicationId "br.ufmg.dcc.imageloader"
+        applicationId "br.ufmg.dcc.tonemapreinhard"
         minSdkVersion 19
         targetSdkVersion 22
         versionCode 1
