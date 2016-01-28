@@ -9,11 +9,6 @@
 
 package br.ufmg.dcc.parallelme.userlibrary.image;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-
-import br.ufmg.dcc.parallelme.userlibrary.function.UserFunction;
 import br.ufmg.dcc.parallelme.userlibrary.Iterable;
 
 /**
@@ -22,53 +17,6 @@ import br.ufmg.dcc.parallelme.userlibrary.Iterable;
  * @author Wilson de Carvalho
  * @version 0.1
  */
-public class Image implements Iterable<Pixel> {
-    final private Bitmap bitmap;
-    final private Resources res;
-    final private int resourceId;
-    final private ImageType imageType;
+public interface Image extends Iterable<Pixel> {
 
-    public Image(Bitmap bitmap) {
-        this.bitmap = bitmap;
-        this.res = null;
-        this.resourceId = -1;
-        this.imageType = ImageType.Bitmap.Bitmap;
-    }
-
-    public Image(Resources res, int resourceId, ImageType imageType) {
-        this.bitmap = null;
-        this.res = res;
-        this.resourceId = resourceId;
-        this.imageType = imageType;
-    }
-
-    /**
-     * Returns the internal bitmap that represents this image.
-     *
-     * @return A Bitmap object representing this image.
-     */
-    public Bitmap toBitmap() {
-        return this.bitmap;
-    }
-
-    /**
-     * Iterate over this array and apply a user function over all
-     * its elements.
-     *
-     * @param userFunction
-     *            User function that must be applied.
-     */
-    @Override
-    public void foreach(UserFunction<Pixel> userFunction) {
-        int width = this.bitmap.getWidth();
-        int height = this.bitmap.getHeight();
-        for (int x=0; x<width; x++) {
-            for (int y=0; y<height; y++) {
-                int color = bitmap.getPixel(x, y);
-                userFunction.function(new Pixel(
-                        new RGBA(Color.red(color), Color.green(color),
-                                Color.blue(color), Color.alpha(color)), x, y));
-            }
-        }
-    }
 }

@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TonemapReinhard.iml" filepath="$PROJECT_DIR$/TonemapReinhard.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../UserLibrary/UserLibrary.iml" filepath="$PROJECT_DIR$/../../UserLibrary/UserLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserLibrary/UserLibrary.iml" filepath="$PROJECT_DIR$/UserLibrary/UserLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../UserLibrary/userlibrary.iml" filepath="$PROJECT_DIR$/../../UserLibrary/userlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../UserLibrary/userlibrary.iml" filepath="$PROJECT_DIR$/../../UserLibrary/userlibrary.iml" />
     </modules>
   </component>
