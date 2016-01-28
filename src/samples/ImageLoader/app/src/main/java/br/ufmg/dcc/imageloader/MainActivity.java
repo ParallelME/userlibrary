@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     JavaConvolutionFlatArray mJavaConvolutionFlatArray;
     JavaConvolutionFlatArrayParallel mJavaConvolutionFlatArrayParallel;
 
+    BitmapLoaderTest mBitmapLoaderTest;
+
     public void load(View view) {
         // Image:
         int image = R.drawable.lencois;
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
             bitmap = mJavaLoaderFlatArray.load(getResources(), image, mMortonSwitch.isChecked());
         } else if (mRunWithSpinner.getSelectedItemPosition() == 2) {
             bitmap = mJavaLoaderFlatArrayParallel.load(getResources(), image, mMortonSwitch.isChecked());
+        } else if(mRunWithSpinner.getSelectedItemPosition() == 3){ //Call user library
+            bitmap = mBitmapLoaderTest.load(getResources(), image);
         } else {
             bitmap = mRenderScriptLoader.load(getResources(), image);
         }
@@ -111,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         mJavaConvolution = new JavaConvolution();
         mJavaConvolutionFlatArray = new JavaConvolutionFlatArray();
         mJavaConvolutionFlatArrayParallel = new JavaConvolutionFlatArrayParallel();
+        mBitmapLoaderTest = new BitmapLoaderTest();
     }
 
     @Override
