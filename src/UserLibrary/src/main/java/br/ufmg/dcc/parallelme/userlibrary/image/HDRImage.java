@@ -22,15 +22,13 @@ import br.ufmg.dcc.parallelme.userlibrary.function.UserFunction;
 public class HDRImage implements Image {
     final private Resources res;
     final private int resourceId;
-    final private ImageType imageType;
     private float[][][] array;
     private int width = -1;
     private int height = -1;
 
-    public HDRImage(Resources res, int resourceId, ImageType imageType) {
+    public HDRImage(Resources res, int resourceId) {
         this.res = res;
         this.resourceId = resourceId;
-        this.imageType = imageType;
     }
 
     /**

@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 
 import br.ufmg.dcc.parallelme.userlibrary.function.UserFunction;
 import br.ufmg.dcc.parallelme.userlibrary.image.HDRImage;
-import br.ufmg.dcc.parallelme.userlibrary.image.ImageType;
 import br.ufmg.dcc.parallelme.userlibrary.image.Pixel;
 import br.ufmg.dcc.tonemapreinhard.formats.RGB;
 import br.ufmg.dcc.parallelme.userlibrary.image.Image;
@@ -28,7 +27,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
         this.height = bitmap.getHeight();
         this.width = bitmap.getWidth();
 
-        this.image = new HDRImage(res, resource, ImageType.HDR);
+        this.image = new HDRImage(res, resource);
 
         this.toYxy();
         this.scaleToMidtone(key);
