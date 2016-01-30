@@ -14,18 +14,12 @@ import br.ufmg.dcc.parallelme.userlibrary.image.Image;
  * @author Pedro Caldeira
  */
 public class ReinhardCollectionOperator implements ReinhardOperator {
-    private int height, width;
-    private Image image;
+    private HDRImage image;
     private double sum = 0.0;
     private float max = 0.0f;
 
     @Override
     public Bitmap runOp(Resources res, int resource, float key, float gamma) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inMutable = true;
-        Bitmap bitmap = BitmapFactory.decodeResource(res, resource, options);
-        this.height = bitmap.getHeight();
-        this.width = bitmap.getWidth();
 
         this.image = new HDRImage(res, resource);
 
@@ -35,7 +29,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
         this.toRgb();
         this.clamp();
 
-        return bitmap;
+        return this.image.toBitmap(gamma);
     }
 
 
@@ -80,7 +74,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
             }
         });
 
-        return Math.exp(sum/(double) (height*width));
+        return Math.exp(sum/(double) (this.image.getHeight()*this.image.getWidth()));
     }
 
     private void scaleToMidtone(final float key) {
