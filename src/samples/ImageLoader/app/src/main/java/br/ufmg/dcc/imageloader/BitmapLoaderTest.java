@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import br.ufmg.dcc.parallelme.userlibrary.function.UserFunction;
+import br.ufmg.dcc.parallelme.userlibrary.image.BitmapImage;
 import br.ufmg.dcc.parallelme.userlibrary.image.Image;
 import br.ufmg.dcc.parallelme.userlibrary.image.Pixel;
 import br.ufmg.dcc.parallelme.userlibrary.image.RGB;
@@ -19,7 +20,7 @@ public class BitmapLoaderTest {
 
         Bitmap bitmap = BitmapFactory.decodeResource(res, resource, options);
 
-        Image image = new Image(bitmap);
+        BitmapImage image = new BitmapImage(bitmap);
         // to Yxy
         image.foreach(new UserFunction<Pixel>() {
             @Override
