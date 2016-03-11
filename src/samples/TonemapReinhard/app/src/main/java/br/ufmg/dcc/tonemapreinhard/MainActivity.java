@@ -1,5 +1,6 @@
 package br.ufmg.dcc.tonemapreinhard;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.res.Configuration;
 import android.support.v8.renderscript.*;
@@ -22,7 +23,7 @@ import android.widget.TextView;
 import br.ufmg.dcc.tonemapreinhard.R;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private SeekBar mKeyValueSeekBar;
     private SeekBar mGammaCorrectionSeekBar;
     private Spinner mRunCountSpinner;

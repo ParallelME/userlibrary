@@ -64,17 +64,16 @@ public class HDRImage implements Image {
         return height;
     }
 
-    public Bitmap toBitmap(float gamma){
+    public Bitmap toBitmap(){
         Bitmap bitmap = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.ARGB_8888);
-        float power = 1.0f / gamma;
         for(int y = 0; y < this.height; ++y) {
             for(int x = 0; x < this.width; ++x) {
 
                 bitmap.setPixel(x, y, Color.argb(
                         255,
-                        (int) (255.0f * Math.pow(pixels[x][y].rgba.red, power)),
-                        (int) (255.0f * Math.pow(pixels[x][y].rgba.green, power)),
-                        (int) (255.0f * Math.pow(pixels[x][y].rgba.blue, power))
+                        (int) (255.0f * pixels[x][y].rgba.red),
+                        (int) (255.0f * pixels[x][y].rgba.green),
+                        (int) (255.0f * pixels[x][y].rgba.blue)
                 ));
             }
         }
