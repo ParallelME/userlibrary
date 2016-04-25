@@ -4,7 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import br.ufmg.dcc.parallelme.userlibrary.function.UserFunction;
+import br.ufmg.dcc.parallelme.userlibrary.function.ForeachFunction;
 import br.ufmg.dcc.parallelme.userlibrary.image.HDRImage;
 import br.ufmg.dcc.parallelme.userlibrary.image.Pixel;
 import br.ufmg.dcc.tonemapreinhard.formats.RGB;
@@ -36,7 +36,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
 
 
     private void toYxy(){
-        image.foreach(new UserFunction<Pixel>() {
+        image.foreach(new ForeachFunction<Pixel>() {
             @Override
             public void function(Pixel pixel) {
                 float[] result = new float[3];
@@ -69,7 +69,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
     private double logAverage() {
         sum = 0;
 
-        image.foreach(new UserFunction<Pixel>() {
+        image.foreach(new ForeachFunction<Pixel>() {
             @Override
             public void function(Pixel pixel) {
                 sum += Math.log(0.00001f + pixel.rgba.red);
@@ -82,7 +82,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
     private void scaleToMidtone(final float key) {
         final double scaleFactor = 1.0f / this.logAverage();
 
-        image.foreach(new UserFunction<Pixel>() {
+        image.foreach(new ForeachFunction<Pixel>() {
             @Override
             public void function(Pixel pixel) {
                 pixel.rgba.red *= scaleFactor * key;
@@ -92,7 +92,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
 
     private float getMaxValue() {
         max = 0;
-        image.foreach(new UserFunction<Pixel>() {
+        image.foreach(new ForeachFunction<Pixel>() {
             @Override
             public void function(Pixel pixel) {
                 if (pixel.rgba.red > max) max = pixel.rgba.red;
@@ -104,7 +104,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
 
     private void tonemap() {
         final double max2 = Math.pow(getMaxValue(), 2);
-        image.foreach(new UserFunction<Pixel>() {
+        image.foreach(new ForeachFunction<Pixel>() {
             @Override
             public void function(Pixel pixel) {
                 pixel.rgba.red *= (1.0f + pixel.rgba.red / max2) / (1.0f + pixel.rgba.red);
@@ -113,7 +113,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
     }
 
     private void toRgb(){
-        image.foreach(new UserFunction<Pixel>() {
+        image.foreach(new ForeachFunction<Pixel>() {
             @Override
             public void function(Pixel pixel) {
                 RGB val = new RGB();
@@ -152,7 +152,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
 
     private void power(final float gamma) {
         final float power = 1.0f / gamma;
-        image.foreach(new UserFunction<Pixel>() {
+        image.foreach(new ForeachFunction<Pixel>() {
             @Override
             public void function(Pixel pixel) {
                 // Clamp.
@@ -171,7 +171,7 @@ public class ReinhardCollectionOperator implements ReinhardOperator {
     }
 
     private void clamp() {
-        image.foreach(new UserFunction<Pixel>() {
+        image.foreach(new ForeachFunction<Pixel>() {
             @Override
             public void function(Pixel pixel) {
                 if (pixel.rgba.red > 1.0f) pixel.rgba.red = 1.0f;

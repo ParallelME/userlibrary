@@ -7,16 +7,17 @@
  *  DCC-UFMG
  */
 
-package br.ufmg.dcc.parallelme.userlibrary.parallel;
-
-import br.ufmg.dcc.parallelme.userlibrary.datatypes.UserData;
+package br.ufmg.dcc.parallelme.userlibrary.datatypes;
 
 /**
- * Interface that describes a parallelizable user library.
+ * Base class for all indexed and valued data.
  *
- * @author Wilson de Carvalho
+ * @param <T>
+ *     Type that will be used to store class data.
+ *
+ * @author Wilson de Carvalho.
  */
-@SuppressWarnings("rawtypes")
-public interface Parallelizable<E extends UserData> {
-    ParallelIterable<E> par();
+public class IndexedValuedData<T> implements UserData<T> {
+    public T value;
+    public int[] index;
 }

@@ -7,16 +7,12 @@
  *  DCC-UFMG
  */
 
-package br.ufmg.dcc.parallelme.userlibrary.parallel;
-
-import br.ufmg.dcc.parallelme.userlibrary.Iterable;
-import br.ufmg.dcc.parallelme.userlibrary.datatypes.UserData;
+package br.ufmg.dcc.parallelme.userlibrary.datatypes;
 
 /**
- * Base class for all parallel iterables.
+ * Interface for defining an user data. All user data classes must implement this interface.
  *
  * @author Wilson de Carvalho
  */
-@SuppressWarnings("rawtypes")
-public abstract class ParallelIterable<E extends UserData> implements Iterable<E> {
+public interface UserData<T> {
 }

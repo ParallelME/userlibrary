@@ -1,5 +1,6 @@
 package br.ufmg.dcc.tonemapreinhard;
 
+import android.renderscript.Element;
 import android.support.v8.renderscript.*;
 import android.content.res.Resources;
 import android.graphics.Bitmap;

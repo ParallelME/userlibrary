@@ -1,6 +1,6 @@
 /**                                               _    __ ____
  *   _ __  ___ _____   ___   __  __   ___ __     / |  / /  __/
- *  |  _ \/ _ |  _  | / _ | / / / /  / _ / /    /  | / / /__
+ *  |  _ \/ _ |  _  | / _ | / / / /  / __/ /    /  | / / /__
  *  |  __/ __ |  ___|/ __ |/ /_/ /__/ __/ /__  / / v  / /__
  *  |_| /_/ |_|_|\_\/_/ |_/____/___/___/____/ /_/  /_/____/
  *
@@ -13,7 +13,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
-import br.ufmg.dcc.parallelme.userlibrary.function.UserFunction;
+import br.ufmg.dcc.parallelme.userlibrary.function.ForeachFunction;
 
 /**
  * HDR image processing iterator.
@@ -48,7 +48,7 @@ public class HDRImage implements Image {
      *            User function that must be applied.
      */
     @Override
-    public void foreach(UserFunction<Pixel> userFunction) {
+    public void foreach(ForeachFunction<Pixel> userFunction) {
         for (int x=0; x<this.width; x++) {
             for (int y=0; y<this.height; y++) {
                 userFunction.function(pixels[x][y]);
@@ -68,7 +68,6 @@ public class HDRImage implements Image {
         Bitmap bitmap = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.ARGB_8888);
         for(int y = 0; y < this.height; ++y) {
             for(int x = 0; x < this.width; ++x) {
-
                 bitmap.setPixel(x, y, Color.argb(
                         255,
                         (int) (255.0f * pixels[x][y].rgba.red),

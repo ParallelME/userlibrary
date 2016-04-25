@@ -1,6 +1,6 @@
 /**                                               _    __ ____
  *   _ __  ___ _____   ___   __  __   ___ __     / |  / /  __/
- *  |  _ \/ _ |  _  | / _ | / / / /  / _ / /    /  | / / /__
+ *  |  _ \/ _ |  _  | / _ | / / / /  / __/ /    /  | / / /__
  *  |  __/ __ |  ___|/ __ |/ /_/ /__/ __/ /__  / / v  / /__
  *  |_| /_/ |_|_|\_\/_/ |_/____/___/___/____/ /_/  /_/____/
  *
@@ -9,11 +9,10 @@
 
 package br.ufmg.dcc.parallelme.userlibrary.image;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
-import br.ufmg.dcc.parallelme.userlibrary.function.UserFunction;
+import br.ufmg.dcc.parallelme.userlibrary.function.ForeachFunction;
 
 /**
  * Bitmap image processing iterator.
@@ -45,7 +44,7 @@ public class BitmapImage implements Image {
      *            User function that must be applied.
      */
     @Override
-    public void foreach(UserFunction<Pixel> userFunction) {
+    public void foreach(ForeachFunction<Pixel> userFunction) {
         int width = this.bitmap.getWidth();
         int height = this.bitmap.getHeight();
         Pixel pixel;

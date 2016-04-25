@@ -7,16 +7,12 @@
  *  DCC-UFMG
  */
 
-package br.ufmg.dcc.parallelme.userlibrary.parallel;
-
-import br.ufmg.dcc.parallelme.userlibrary.Iterable;
-import br.ufmg.dcc.parallelme.userlibrary.datatypes.UserData;
+package br.ufmg.dcc.parallelme.userlibrary.datatypes;
 
 /**
- * Base class for all parallel iterables.
+ * Signed 32 bits integer.
  *
  * @author Wilson de Carvalho
  */
-@SuppressWarnings("rawtypes")
-public abstract class ParallelIterable<E extends UserData> implements Iterable<E> {
+public class Int32 extends NumericalData<Integer> {
 }
