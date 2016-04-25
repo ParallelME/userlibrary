@@ -25,13 +25,11 @@ public class MainActivity extends AppCompatActivity {
     RenderScript mRS;
     RenderScriptLoader mRenderScriptLoader;
     JavaLoader mJavaLoader;
-    JavaLoaderFlatArray mJavaLoaderFlatArray;
-    JavaLoaderFlatArrayParallel mJavaLoaderFlatArrayParallel;
+    JavaLoaderBitmapImage mJavaLoaderBitmapImage;
 
     RenderScriptConvolution mRenderScriptConvolution;
     JavaConvolution mJavaConvolution;
-    JavaConvolutionFlatArray mJavaConvolutionFlatArray;
-    JavaConvolutionFlatArrayParallel mJavaConvolutionFlatArrayParallel;
+    JavaConvolutionBitmapImage mJavaConvolutionBitmapImage;
 
     BitmapLoaderTest mBitmapLoaderTest;
 
@@ -47,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
         if (mRunWithSpinner.getSelectedItemPosition() == 0) {
             bitmap = mJavaLoader.load(getResources(), image);
         } else if (mRunWithSpinner.getSelectedItemPosition() == 1) {
-            bitmap = mJavaLoaderFlatArray.load(getResources(), image, mMortonSwitch.isChecked());
-        } else if (mRunWithSpinner.getSelectedItemPosition() == 2) {
-            bitmap = mJavaLoaderFlatArrayParallel.load(getResources(), image, mMortonSwitch.isChecked());
+            bitmap = mJavaLoaderBitmapImage.load(getResources(), image);
         } else if(mRunWithSpinner.getSelectedItemPosition() == 3){ //Call user library
             bitmap = mBitmapLoaderTest.load(getResources(), image);
         } else {
@@ -74,9 +70,7 @@ public class MainActivity extends AppCompatActivity {
         if(mRunWithSpinner.getSelectedItemPosition() == 0)
             bitmap = mJavaConvolution.convolute(getResources(), image);
         else if (mRunWithSpinner.getSelectedItemPosition() == 1)
-            bitmap = mJavaConvolutionFlatArray.convolute(getResources(), image, mMortonSwitch.isChecked());
-        else if (mRunWithSpinner.getSelectedItemPosition() == 2)
-            bitmap = mJavaConvolutionFlatArrayParallel.convolute(getResources(), image, mMortonSwitch.isChecked());
+            bitmap = mJavaConvolutionBitmapImage.convolute(getResources(), image, mMortonSwitch.isChecked());
         else
             bitmap = mRenderScriptConvolution.convolute(getResources(), image);
 
@@ -97,8 +91,7 @@ public class MainActivity extends AppCompatActivity {
         mRS = RenderScript.create(this);
         mRenderScriptLoader = new RenderScriptLoader(mRS);
         mJavaLoader = new JavaLoader();
-        mJavaLoaderFlatArray = new JavaLoaderFlatArray();
-        mJavaLoaderFlatArrayParallel = new JavaLoaderFlatArrayParallel();
+        mJavaLoaderBitmapImage = new JavaLoaderBitmapImage();
 
         mRunWithSpinner = (Spinner) findViewById(R.id.spinner_run_with);
         mMortonSwitch = (Switch) findViewById(R.id.switchMorton);
@@ -113,8 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
         mRenderScriptConvolution = new RenderScriptConvolution(mRS);
         mJavaConvolution = new JavaConvolution();
-        mJavaConvolutionFlatArray = new JavaConvolutionFlatArray();
-        mJavaConvolutionFlatArrayParallel = new JavaConvolutionFlatArrayParallel();
+        mJavaConvolutionBitmapImage = new JavaConvolutionBitmapImage();
         mBitmapLoaderTest = new BitmapLoaderTest();
     }
 

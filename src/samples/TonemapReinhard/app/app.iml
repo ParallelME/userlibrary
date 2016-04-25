@@ -71,6 +71,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dependency-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/TonemapReinhard/userlibrary/unspecified/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
@@ -94,6 +95,6 @@
     <orderEntry type="library" exported="" name="support-annotations-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.1.1" level="project" />
-    <orderEntry type="module" module-name="userlibrary" exported="" />
+    <orderEntry type="library" exported="" name="userlibrary-unspecified" level="project" />
   </component>
 </module>
