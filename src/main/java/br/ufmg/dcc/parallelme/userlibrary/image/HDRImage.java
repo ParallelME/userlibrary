@@ -69,11 +69,11 @@ public class HDRImage implements Image {
 
     public Bitmap toBitmap(){
         Bitmap bitmap = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.ARGB_8888);
-        copyTo(bitmap);
+        toBitmap(bitmap);
         return bitmap;
     }
 
-    public void copyTo(Bitmap bitmap) {
+    public void toBitmap(Bitmap bitmap) {
         for(int y = 0; y < this.height; ++y) {
             for(int x = 0; x < this.width; ++x) {
                 bitmap.setPixel(x, y, Color.argb(
