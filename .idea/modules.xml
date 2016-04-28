@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/UserLibrary.iml" filepath="$PROJECT_DIR$/UserLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-library.iml" filepath="$PROJECT_DIR$/user-library.iml" />
       <module fileurl="file://$PROJECT_DIR$/userlibrary/userlibrary.iml" filepath="$PROJECT_DIR$/userlibrary/userlibrary.iml" />
     </modules>
   </component>
