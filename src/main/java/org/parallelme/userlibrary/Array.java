@@ -48,6 +48,21 @@ public class Array<E extends NumericalData> {
     }
 
     /**
+     * Fills an informed array with the data stored in the inner array.
+     */
+    public void toJavaArray(final Object array) {
+        if (java.lang.reflect.Array.getLength(array) != java.lang.reflect.Array.getLength(this.array)) {
+            throw new RuntimeException("Array sizes' differ.");
+        }
+        this.foreach(new ForeachFunction<E>() {
+            @Override
+            public void function(E element) {
+                java.lang.reflect.Array.set(array, element.index[0], element.value);
+            }
+        });
+    }
+
+    /**
      * Iterates over this array and applies an user function over all its
      * elements.
      *

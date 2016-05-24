@@ -26,18 +26,14 @@ public class HDRImage implements Image {
     private int height;
     private Pixel[][] pixels;
 
-    public HDRImage(Resources res, int resourceId) {
-        this(RGBE.loadFromResource(res, resourceId));
-    }
-
-    public HDRImage(RGBE.ResourceData ret) {
-        this.height = ret.height;
-        this.width = ret.width;
-        this.pixels = new Pixel[ret.width][ret.height];
+    public HDRImage(byte[] data, int width, int height) {
+        this.height = height;
+        this.width = width;
+        this.pixels = new Pixel[width][height];
         float[] rgb = new float[3];
-        for (int i=0; i < ret.width; i++)
-            for (int j=0; j< ret.height; j++){
-                RGBE.rgbe2float(rgb, ret.data, 4 * (j * width + i));
+        for (int i=0; i < width; i++)
+            for (int j=0; j< height; j++){
+                RGBE.rgbe2float(rgb, data, 4 * (j * width + i));
                 pixels[i][j] = new Pixel(new RGBA(rgb[0], rgb[1], rgb[2], 255), i, j);
             }
     }
