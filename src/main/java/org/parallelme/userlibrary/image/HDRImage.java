@@ -8,11 +8,10 @@
 
 package org.parallelme.userlibrary.image;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
-import org.parallelme.userlibrary.function.ForeachFunction;
+import org.parallelme.userlibrary.function.Foreach;
 
 /**
  * HDR image processing iterator.
@@ -46,10 +45,10 @@ public class HDRImage implements Image {
      *            User function that must be applied.
      */
     @Override
-    public void foreach(ForeachFunction<Pixel> userFunction) {
+    public void foreach(Foreach<Pixel> userFunction) {
         for (int x=0; x<this.width; x++) {
             for (int y=0; y<this.height; y++) {
-                userFunction.function(pixels[x][y]);
+                userFunction.function(pixels[x][y], x, y);
             }
         }
     }

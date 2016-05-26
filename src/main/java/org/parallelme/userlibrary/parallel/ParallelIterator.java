@@ -9,23 +9,25 @@
 package org.parallelme.userlibrary.parallel;
 
 import org.parallelme.userlibrary.datatypes.UserData;
-import org.parallelme.userlibrary.function.ForeachFunction;
+import org.parallelme.userlibrary.function.Foreach;
 
 /**
- * Defines the stub for a parallel iterator.
- * Parallel iterators are not implemented in Java as the target parallel code will run on the
- * selected runtime and thus must be translated by ParallelME compiler.
+ * Defines the stub for a parallel iterator. Parallel iterators are not
+ * implemented in Java as the target parallel code will run on the selected
+ * runtime and thus must be translated by ParallelME compiler.
  *
  * @author Wilson de Carvalho
  */
 @SuppressWarnings("rawtypes")
-public class ParallelIterator<E extends UserData> {
-    public ParallelIterator() {
-    }
+public class ParallelIterator<E extends UserData> implements
+		ParallelIterable<E> {
+	public ParallelIterator() {
+	}
 
-    public void foreach(ForeachFunction<E> ff) {
-        throw new RuntimeException(
-                "Parallel iterators are not implemented for Java version. "
-                        +  "Use serial version or compile your code with ParallelME compiler.");
-    }
+	@Override
+	public void foreach(Foreach<E> ff) {
+		throw new RuntimeException(
+				"Parallel iterators are not implemented for Java version. "
+						+ "Use serial version or compile your code with ParallelME compiler.");
+	}
 }

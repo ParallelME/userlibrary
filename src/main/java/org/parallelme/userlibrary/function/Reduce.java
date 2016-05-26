@@ -6,17 +6,16 @@
  *
  */
 
-package org.parallelme.userlibrary.datatypes;
+package org.parallelme.userlibrary.function;
+
+import org.parallelme.userlibrary.datatypes.UserData;
 
 /**
- * Base class for all indexed and valued data.
+ * Interface that users must implement to produce reduction operations.
  *
- * @param <T>
- *     Type that will be used to store class data.
- *
- * @author Wilson de Carvalho.
+ * @author Wilson de Carvalho
  */
-public class IndexedValuedData<T> implements UserData<T> {
-    public T value;
-    public int[] index;
+@SuppressWarnings("rawtypes")
+public interface Reduce<E extends UserData> {
+	E function(E element1, E element2);
 }

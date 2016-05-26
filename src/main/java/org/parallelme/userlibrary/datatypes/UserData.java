@@ -9,7 +9,8 @@
 package org.parallelme.userlibrary.datatypes;
 
 /**
- * Interface for defining an user data. All user data classes must implement this interface.
+ * Interface for defining an user data. All user data classes must implement
+ * this interface.
  *
  * @author Wilson de Carvalho
  */

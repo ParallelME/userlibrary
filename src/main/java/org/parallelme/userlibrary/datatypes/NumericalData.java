@@ -12,9 +12,10 @@ package org.parallelme.userlibrary.datatypes;
  * Base class for all numerical data objects.
  *
  * @param <T>
- *     Type that will be used to store class data.
+ *            Type that will be used to store class data.
  *
  * @author Wilson de Carvalho.
  */
-public abstract class NumericalData<T> extends IndexedValuedData<T> {
+public abstract class NumericalData<T> implements UserData<T> {
+	public T value;
 }

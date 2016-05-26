@@ -17,5 +17,5 @@ import org.parallelme.userlibrary.datatypes.UserData;
  */
 @SuppressWarnings("rawtypes")
 public interface Parallelizable<E extends UserData> {
-    ParallelIterable<E> par();
+	ParallelIterable<E> par();
 }

@@ -11,12 +11,12 @@ package org.parallelme.userlibrary.function;
 import org.parallelme.userlibrary.datatypes.UserData;
 
 /**
- * Interface that users must implement to have access to each element when running foreach
- * iterators.
+ * Interface that users must implement to have access to each element when
+ * running foreach iterators.
  *
  * @author Wilson de Carvalho
  */
 @SuppressWarnings("rawtypes")
-public interface ForeachFunction<E extends UserData> {
-    void function(E element);
+public interface Foreach<E extends UserData> {
+	void function(E element);
 }

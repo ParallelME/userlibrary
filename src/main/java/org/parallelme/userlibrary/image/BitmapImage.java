@@ -11,7 +11,7 @@ package org.parallelme.userlibrary.image;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
-import org.parallelme.userlibrary.function.ForeachFunction;
+import org.parallelme.userlibrary.function.Foreach;
 
 /**
  * Bitmap image processing iterator.
@@ -58,7 +58,7 @@ public class BitmapImage implements Image {
      * @param userFunction User function that must be applied.
      */
     @Override
-    public void foreach(ForeachFunction<Pixel> userFunction) {
+    public void foreach(Foreach<Pixel> userFunction) {
         int width = this.bitmap.getWidth();
         int height = this.bitmap.getHeight();
         Pixel pixel;
@@ -68,7 +68,7 @@ public class BitmapImage implements Image {
                 pixel = new Pixel(
                         new RGBA(Color.red(color), Color.green(color),
                                 Color.blue(color), Color.alpha(color)), x, y);
-                userFunction.function(pixel);
+                userFunction.function(pixel, x, y);
                 this.bitmap.setPixel(x, y, Color.argb((int) pixel.rgba.alpha,
                         (int) pixel.rgba.red, (int) pixel.rgba.green, (int) pixel.rgba.blue));
             }

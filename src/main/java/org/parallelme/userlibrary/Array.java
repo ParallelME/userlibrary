@@ -9,99 +9,108 @@
 package org.parallelme.userlibrary;
 
 import org.parallelme.userlibrary.datatypes.NumericalData;
-import org.parallelme.userlibrary.function.*;
+import org.parallelme.userlibrary.function.Foreach;
+import org.parallelme.userlibrary.function.Reduce;
+import org.parallelme.userlibrary.parallel.ParallelIterable;
 import org.parallelme.userlibrary.parallel.ParallelIterator;
+import org.parallelme.userlibrary.parallel.Parallelizable;
 
 /**
+ * This array currently supports single-dimension arrays with numerical types
+ * defined by ParallelME.
+ *
+ * Future versions should be written to support n-dimensional configurations.
+ *
  * @author Wilson de Carvalho
  */
-@SuppressWarnings("rawtypes")
-public class Array<E extends NumericalData> {
-    private Object array;
-    private final Class<E> typeParameterClass;
-    private final int numDimensions;
+@SuppressWarnings({ "rawtypes", "unchecked" })
+public class Array<E extends NumericalData> implements Iterable<E>,
+		Reducible<E>, Parallelizable<E> {
+	private Object array;
+	private final Class<E> typeParameterClass;
 
-    /**
-     *
-     * @param array
-     *            Primitive type array that will provide the data for this
-     *            array.
-     * @param typeParameterClass
-     *            Class object containing necessary information from
-     *            parametrized type E. This information will be used during
-     *            sequential executions in Java.
-     */
-    public Array(Object array, Class<E> typeParameterClass) {
-        this.array = array;
-        this.typeParameterClass = typeParameterClass;
-        // Number of dimensions fixed in 1, but in future versions we may have support for
-        // multidimensional arrays.
-        this.numDimensions = 1;
-    }
+	/**
+	 * @param array
+	 *            Primitive type array that will provide the data for this
+	 *            array.
+	 * @param typeParameterClass
+	 *            Class object containing necessary information from
+	 *            parametrized type E. This information will be used during
+	 *            sequential executions in Java.
+	 */
+	public Array(Object array, Class<E> typeParameterClass) {
+		this.array = array;
+		this.typeParameterClass = typeParameterClass;
+	}
 
-    /**
-     * Returns the inner array that was informed in the constructor with
-	 * any changes that may have been performed on iterator's calls.
-     */
-    public Object toJavaArray() {
-        return array;
-    }
+	/**
+	 * Returns the inner array that was informed in the constructor with any
+	 * changes that may have been performed on iterator's calls.
+	 */
+	public Object toJavaArray() {
+		return array;
+	}
 
-    /**
-     * Fills an informed array with the data stored in the inner array.
-     */
-    public void toJavaArray(final Object array) {
-        if (java.lang.reflect.Array.getLength(array) != java.lang.reflect.Array.getLength(this.array)) {
-            throw new RuntimeException("Array sizes' differ.");
-        }
-        this.foreach(new ForeachFunction<E>() {
-            @Override
-            public void function(E element) {
-                java.lang.reflect.Array.set(array, element.index[0], element.value);
-            }
-        });
-    }
+	/**
+	 * Fills an informed array with the data stored in the inner array.
+	 */
+	public void toJavaArray(final Object array) {
+		if (java.lang.reflect.Array.getLength(array) != java.lang.reflect.Array
+				.getLength(this.array)) {
+			throw new RuntimeException("Array sizes' differ.");
+		}
+		for (int i = 0; i < java.lang.reflect.Array.getLength(array); i++) {
+			java.lang.reflect.Array.set(array, i,
+					java.lang.reflect.Array.get(this.array, i));
+		}
+	}
 
-    /**
-     * Iterates over this array and applies an user function over all its
-     * elements.
-     *
-     * @param userFunction
-     *            User function that must be applied.
-     */
-    public void foreach(ForeachFunction<E> userFunction) {
-        this.runForeach(userFunction, this.array, new int[numDimensions], 0);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void foreach(Foreach<E> userFunction) {
+		try {
+			E foo = typeParameterClass.newInstance();
+			for (int i = 0; i < java.lang.reflect.Array.getLength(array); i++) {
+				foo.value = java.lang.reflect.Array.get(array, i);
+				userFunction.function(foo);
+				java.lang.reflect.Array.set(array, i, foo.value);
+			}
+		} catch (InstantiationException | IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    @SuppressWarnings("unchecked")
-    private void runForeach(ForeachFunction<E> userFunction, Object array,
-                            int[] index, int currDimension) {
-        if (currDimension < (numDimensions - 1)) {
-            for (int i = 0; i < java.lang.reflect.Array.getLength(array); i++) {
-                index[currDimension] = i;
-                Object tmpArray = java.lang.reflect.Array.get(array, i);
-                this.runForeach(userFunction, tmpArray, index,
-                        currDimension + 1);
-            }
-        } else {
-            E foo;
-            try {
-                for (int i = 0; i < java.lang.reflect.Array.getLength(array); i++) {
-                    index[currDimension] = i;
-                    foo = typeParameterClass.newInstance();
-                    foo.value = java.lang.reflect.Array.get(array, i);
-                    foo.index = index;
-                    userFunction.function(foo);
-                    java.lang.reflect.Array.set(array, i, foo.value);
-                }
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ParallelIterable<E> par() {
+		return new ParallelIterator<E>();
+	}
 
-    }
-
-    public ParallelIterator<E> par() {
-        return new ParallelIterator<E>();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public E reduce(Reduce<E> userFunction) {
+		try {
+			int length = java.lang.reflect.Array.getLength(array);
+			if (length > 0) {
+				E ret = typeParameterClass.newInstance();
+				ret.value = java.lang.reflect.Array.get(array, 0);
+				for (int i = 1; i < length; i++) {
+					E element2 = typeParameterClass.newInstance();
+					element2.value = java.lang.reflect.Array.get(array, i);
+					ret = userFunction.function(ret, element2);
+				}
+				return ret;
+			} else {
+				throw new RuntimeException("Failure reducing empty array.");
+			}
+		} catch (InstantiationException | IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
