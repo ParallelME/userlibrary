@@ -16,5 +16,5 @@ import org.parallelme.userlibrary.datatypes.UserData;
  *
  * @author Wilson de Carvalho
  */
-public interface ParallelIterable<E extends UserData<?>> extends Iterable<E> {
+public interface ParallelIterable<E extends UserData> extends Iterable<E> {
 }

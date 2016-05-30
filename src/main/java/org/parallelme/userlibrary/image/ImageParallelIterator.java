@@ -16,9 +16,9 @@ import org.parallelme.userlibrary.parallel.ParallelIterable;
  *
  * @author Wilson de Carvalho
  */
-public class ImageParallelIterator implements ParallelIterable<RGBA> {
+public class ImageParallelIterator implements ParallelIterable<Pixel> {
     @Override
-    public void foreach(Foreach<RGBA> userFunction) {
+    public void foreach(Foreach<Pixel> userFunction) {
         // TODO Criar a implementacao aqui
     }
 }

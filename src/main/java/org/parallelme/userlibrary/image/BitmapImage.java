@@ -12,6 +12,9 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import org.parallelme.userlibrary.function.Foreach;
+import org.parallelme.userlibrary.parallel.ParallelIterable;
+import org.parallelme.userlibrary.parallel.ParallelIterator;
+import org.parallelme.userlibrary.parallel.Parallelizable;
 
 /**
  * Bitmap image processing iterator.
@@ -19,7 +22,7 @@ import org.parallelme.userlibrary.function.Foreach;
  * @author Wilson de Carvalho
  * @version 0.1
  */
-public class BitmapImage implements Image {
+public class BitmapImage implements Image, Parallelizable<Pixel> {
     final private Bitmap bitmap;
 
     public BitmapImage(Bitmap bitmap) {
@@ -68,10 +71,15 @@ public class BitmapImage implements Image {
                 pixel = new Pixel(
                         new RGBA(Color.red(color), Color.green(color),
                                 Color.blue(color), Color.alpha(color)), x, y);
-                userFunction.function(pixel, x, y);
+                userFunction.function(pixel);
                 this.bitmap.setPixel(x, y, Color.argb((int) pixel.rgba.alpha,
                         (int) pixel.rgba.red, (int) pixel.rgba.green, (int) pixel.rgba.blue));
             }
         }
+    }
+
+    @Override
+    public ParallelIterable<Pixel> par() {
+        return new ParallelIterator<>();
     }
 }

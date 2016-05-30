@@ -12,6 +12,9 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import org.parallelme.userlibrary.function.Foreach;
+import org.parallelme.userlibrary.parallel.ParallelIterable;
+import org.parallelme.userlibrary.parallel.ParallelIterator;
+import org.parallelme.userlibrary.parallel.Parallelizable;
 
 /**
  * HDR image processing iterator.
@@ -19,8 +22,7 @@ import org.parallelme.userlibrary.function.Foreach;
  * @author Pedro Caldeira, Wilson de Carvalho
  * @version 0.1
  */
-public class HDRImage implements Image {
-
+public class HDRImage implements Image, Parallelizable<Pixel> {
     private int width;
     private int height;
     private Pixel[][] pixels;
@@ -48,7 +50,7 @@ public class HDRImage implements Image {
     public void foreach(Foreach<Pixel> userFunction) {
         for (int x=0; x<this.width; x++) {
             for (int y=0; y<this.height; y++) {
-                userFunction.function(pixels[x][y], x, y);
+                userFunction.function(pixels[x][y]);
             }
         }
     }
@@ -78,5 +80,10 @@ public class HDRImage implements Image {
                 ));
             }
         }
+    }
+
+    @Override
+    public ParallelIterable<Pixel> par() {
+        return new ParallelIterator<>();
     }
 }
