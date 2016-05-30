@@ -8,7 +8,7 @@
 
 package org.parallelme.userlibrary.image;
 
-import org.parallelme.userlibrary.function.ForeachFunction;
+import org.parallelme.userlibrary.function.Foreach;
 import org.parallelme.userlibrary.parallel.ParallelIterable;
 
 /**
@@ -16,9 +16,9 @@ import org.parallelme.userlibrary.parallel.ParallelIterable;
  *
  * @author Wilson de Carvalho
  */
-public class ImageParallelIterator extends ParallelIterable<RGBA> {
+public class ImageParallelIterator implements ParallelIterable<RGBA> {
     @Override
-    public void foreach(ForeachFunction<RGBA> userFunction) {
+    public void foreach(Foreach<RGBA> userFunction) {
         // TODO Criar a implementacao aqui
     }
 }
