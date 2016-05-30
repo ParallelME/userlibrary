@@ -77,7 +77,9 @@ public class Array<E extends NumericalData> implements Iterable<E>,
 				userFunction.function(foo);
 				java.lang.reflect.Array.set(array, i, foo.value);
 			}
-		} catch (InstantiationException | IllegalAccessException e) {
+		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch(IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -109,7 +111,9 @@ public class Array<E extends NumericalData> implements Iterable<E>,
 			} else {
 				throw new RuntimeException("Failure reducing empty array.");
 			}
-		} catch (InstantiationException | IllegalAccessException e) {
+		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
+		} catch(IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
 	}
