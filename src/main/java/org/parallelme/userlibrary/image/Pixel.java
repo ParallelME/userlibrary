@@ -29,4 +29,10 @@ public class Pixel implements UserData {
         this.x = x;
         this.y = y;
     }
+
+    public Pixel(float red, float green, float blue, float alpha, int x, int y) {
+        this.rgba = new RGBA(red, green, blue, alpha);
+        this.x = x;
+        this.y = y;
+    }
 }
