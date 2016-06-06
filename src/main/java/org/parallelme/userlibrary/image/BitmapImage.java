@@ -61,7 +61,7 @@ public class BitmapImage implements Image, Parallelizable<Pixel> {
      */
     public void toBitmap(final Bitmap bitmap) {
         for (int x = 0; x < width; x++) {
-            int base = x * width;
+            int base = x * height;
             for (int y = 0; y < height; y++) {
                 bitmap.setPixel(x, y, pixels[base + y].rgba.toColor());
             }
