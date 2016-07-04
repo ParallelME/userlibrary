@@ -14,4 +14,11 @@ package org.parallelme.userlibrary.datatypes;
  * @author Wilson de Carvalho
  */
 public class Float32 extends NumericalData<Float> {
+    public Float32() {
+        this.value = null;
+    }
+
+    public Float32(Float value) {
+        this.value = value;
+    }
 }

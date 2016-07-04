@@ -14,4 +14,11 @@ package org.parallelme.userlibrary.datatypes;
  * @author Wilson de Carvalho
  */
 public class Int32 extends NumericalData<Integer> {
+    public Int32() {
+        this.value = null;
+    }
+
+    public Int32(Integer value) {
+        this.value = value;
+    }
 }

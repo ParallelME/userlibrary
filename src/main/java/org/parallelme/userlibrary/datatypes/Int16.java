@@ -14,4 +14,11 @@ package org.parallelme.userlibrary.datatypes;
  * @author Wilson de Carvalho
  */
 public class Int16 extends NumericalData<Short> {
+    public Int16() {
+        this.value = null;
+    }
+
+    public Int16(Short value) {
+        this.value = value;
+    }
 }
