@@ -9,27 +9,15 @@
 package org.parallelme.userlibrary.image;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
-
-import org.parallelme.userlibrary.function.Foreach;
-import org.parallelme.userlibrary.function.Reduce;
-import org.parallelme.userlibrary.parallel.ParallelIterable;
-import org.parallelme.userlibrary.parallel.ParallelIterator;
-import org.parallelme.userlibrary.parallel.Parallelizable;
 
 /**
- * Bitmap image processing iterator.
+ * Bitmap image processing class.
  *
  * @author Wilson de Carvalho
  * @author Renato Utsch
  * @version 0.1
  */
-public class BitmapImage implements Image, Parallelizable<Pixel> {
-    private int width;
-    private int height;
-    private int size;
-    private Pixel[] pixels;
-
+public class BitmapImage extends Image {
     public BitmapImage(Bitmap bitmap) {
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
@@ -66,38 +54,5 @@ public class BitmapImage implements Image, Parallelizable<Pixel> {
                 bitmap.setPixel(x, y, pixels[base + y].rgba.toColor());
             }
         }
-    }
-
-    /**
-     * Iterate over this array and apply a user function over all
-     * its elements.
-     *
-     * @param userFunction User function that must be applied.
-     */
-    @Override
-    public void foreach(Foreach<Pixel> userFunction) {
-        for (int i = 0; i < size; i++)
-            userFunction.function(pixels[i]);
-    }
-
-    /**
-     * Iterates over this bitmap and applies an user function over
-     * all its elements.
-     *
-     * @param userFunction User function that is to be applied.
-     * @return The result of applying the user function.
-     */
-    @Override
-    public Pixel reduce(Reduce<Pixel> userFunction) {
-        Pixel pixel1 = pixels[0];
-        for (int i = 1; i < size; i++)
-                pixel1 = userFunction.function(pixel1, pixels[i]);
-
-        return pixel1;
-    }
-
-    @Override
-    public ParallelIterable<Pixel> par() {
-        return new ParallelIterator<>();
     }
 }

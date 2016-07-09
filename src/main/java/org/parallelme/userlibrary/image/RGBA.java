@@ -8,8 +8,6 @@
 
 package org.parallelme.userlibrary.image;
 
-import android.graphics.Color;
-
 /**
  * Support for RGBA color space.
  * The attributes are public to increase user code readability and increase Java version (single
@@ -26,14 +24,5 @@ public final class RGBA extends RGB {
     public RGBA(float red, float green, float blue, float alpha) {
         super(red, green, blue);
         this.alpha = alpha;
-    }
-
-    public RGBA(int c) {
-        super(Color.red(c), Color.green(c), Color.blue(c));
-        this.alpha = Color.alpha(c);
-    }
-
-    public int toColor() {
-        return Color.argb((int) this.alpha, (int) this.red, (int) this.green, (int) this.blue);
     }
 }

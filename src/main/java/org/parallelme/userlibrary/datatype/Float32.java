@@ -6,7 +6,7 @@
  *
  */
 
-package org.parallelme.userlibrary.datatypes;
+package org.parallelme.userlibrary.datatype;
 
 /**
  * Signed 32 bits float.
@@ -15,10 +15,25 @@ package org.parallelme.userlibrary.datatypes;
  */
 public class Float32 extends NumericalData<Float> {
     public Float32() {
-        this.value = null;
+        value = null;
     }
 
     public Float32(Float value) {
         this.value = value;
     }
+
+	@Override
+	public void setValue(Object obj) {
+		value = (Float) obj;
+	}
+
+	@Override
+	public Object getValue() {
+		return value;
+	}
+
+	@Override
+	public Class<Float> getValueClass() {
+		return Float.class;
+	}
 }

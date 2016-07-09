@@ -8,13 +8,14 @@
 
 package org.parallelme.userlibrary.image;
 
-import org.parallelme.userlibrary.datatypes.UserData;
+import org.parallelme.userlibrary.datatype.UserData;
 
 /**
  * Represents a pixel with all its data: color information and its coordinates.
  *
  * @author Wilson de Carvalho
  */
+@SuppressWarnings("rawtypes")
 public class Pixel implements UserData {
     public RGBA rgba;
     public int x = -1;
@@ -37,4 +38,21 @@ public class Pixel implements UserData {
         this.x = x;
         this.y = y;
     }
+
+	@Override
+	public void setValue(Object obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Class<Pixel> getValueClass() {
+		return Pixel.class;
+	}
 }

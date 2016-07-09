@@ -6,16 +6,16 @@
  *
  */
 
-package org.parallelme.userlibrary.parallel;
+package org.parallelme.userlibrary.function;
 
-import org.parallelme.userlibrary.datatypes.UserData;
+import org.parallelme.userlibrary.datatype.UserData;
 
 /**
- * Interface that describes a parallelizable user library.
+ * Interface that users must implement to produce mapping operations.
  *
  * @author Wilson de Carvalho
  */
 @SuppressWarnings("rawtypes")
-public interface Parallelizable<E extends UserData> {
-	ParallelIterable<E> par();
+public interface Map<R extends UserData, E extends UserData> {
+	R function(E element);
 }

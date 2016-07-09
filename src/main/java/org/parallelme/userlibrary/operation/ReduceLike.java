@@ -6,24 +6,23 @@
  *
  */
 
-package org.parallelme.userlibrary;
+package org.parallelme.userlibrary.operation;
 
-import org.parallelme.userlibrary.datatypes.UserData;
-import org.parallelme.userlibrary.function.Foreach;
+import org.parallelme.userlibrary.datatype.UserData;
+import org.parallelme.userlibrary.function.Reduce;
 
 /**
- * Base interface for all iterable types existent on ParallelME. Generic iteration operations are
- * defined here.
+ * Base interface for all collections that need to implement reduce operations on ParallelME.
  *
  * @author Wilson de Carvalho
  */
 @SuppressWarnings("rawtypes")
-public interface Iterable<E extends UserData> {
+public interface ReduceLike<E extends UserData> {
     /**
-     * Applies an user function over all elements of this iterable.
+     * Applies a Reduce function in all elements.
      *
      * @param userFunction
      *            The user function that must be applied.
      */
-    void foreach(Foreach<E> userFunction);
+    E reduce(Reduce<E> userFunction);
 }

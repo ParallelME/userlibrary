@@ -6,7 +6,7 @@
  *
  */
 
-package org.parallelme.userlibrary.datatypes;
+package org.parallelme.userlibrary.datatype;
 
 /**
  * Interface for defining an user data. All user data classes must implement
@@ -15,4 +15,9 @@ package org.parallelme.userlibrary.datatypes;
  * @author Wilson de Carvalho
  */
 public interface UserData<T> {
+	public void setValue(Object obj);
+
+	public Object getValue();
+	
+	public Class<T> getValueClass();
 }

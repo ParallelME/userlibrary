@@ -6,19 +6,34 @@
  *
  */
 
-package org.parallelme.userlibrary.datatypes;
+package org.parallelme.userlibrary.datatype;
 
 /**
- * Signed 16 bits integer.
+ * Signed 32 bits integer.
  *
  * @author Wilson de Carvalho
  */
-public class Int16 extends NumericalData<Short> {
-    public Int16() {
+public class Int32 extends NumericalData<Integer> {
+    public Int32() {
         this.value = null;
     }
 
-    public Int16(Short value) {
+    public Int32(Integer value) {
         this.value = value;
     }
+    
+	@Override
+	public void setValue(Object obj) {
+		value = (Integer) obj;
+	}
+
+	@Override
+	public Object getValue() {
+		return value;
+	}
+
+	@Override
+	public Class<Integer> getValueClass() {
+		return Integer.class;
+	}
 }

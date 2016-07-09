@@ -8,7 +8,7 @@
 
 package org.parallelme.userlibrary.image;
 
-import org.parallelme.userlibrary.datatypes.UserData;
+import org.parallelme.userlibrary.datatype.UserData;
 
 /**
  * Support for RGB color space.
@@ -17,6 +17,7 @@ import org.parallelme.userlibrary.datatypes.UserData;
  *
  * @author Wilson de Carvalho
  */
+@SuppressWarnings("rawtypes")
 public class RGB implements UserData {
     public float red = 0;
     public float green = 0;
@@ -29,4 +30,21 @@ public class RGB implements UserData {
         this.green = green;
         this.blue = blue;
     }
+
+	@Override
+	public void setValue(Object obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Class<RGB> getValueClass() {
+		return RGB.class;
+	}
 }

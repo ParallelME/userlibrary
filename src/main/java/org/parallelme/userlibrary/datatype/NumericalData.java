@@ -6,15 +6,16 @@
  *
  */
 
-package org.parallelme.userlibrary.parallel;
-
-import org.parallelme.userlibrary.Iterable;
-import org.parallelme.userlibrary.datatypes.UserData;
+package org.parallelme.userlibrary.datatype;
 
 /**
- * Base class for all parallel iterables.
+ * Base class for all numerical data objects.
  *
- * @author Wilson de Carvalho
+ * @param <T>
+ *            Type that will be used to store class data.
+ *
+ * @author Wilson de Carvalho.
  */
-public interface ParallelIterable<E extends UserData> extends Iterable<E> {
+public abstract class NumericalData<T> implements UserData<T> {
+	public T value;
 }

@@ -6,24 +6,24 @@
  *
  */
 
-package org.parallelme.userlibrary;
+package org.parallelme.userlibrary.operation;
 
-import org.parallelme.userlibrary.datatypes.UserData;
-import org.parallelme.userlibrary.function.Reduce;
+import org.parallelme.userlibrary.CollectionLike;
+import org.parallelme.userlibrary.datatype.UserData;
+import org.parallelme.userlibrary.function.Map;
 
 /**
- * Base interface for all reducible types existent on ParallelME. Generic reduction operations are
- * defined here.
+ * Base interface for all collections that need to implement map operations on ParallelME.
  *
  * @author Wilson de Carvalho
  */
 @SuppressWarnings("rawtypes")
-public interface Reducible<E extends UserData> {
+public interface MapLike<E extends UserData> {
     /**
-     * Applies a reduction function in all elements of this reducible.
+     * Applies a Map function in all elements.
      *
      * @param userFunction
      *            The user function that must be applied.
      */
-    E reduce(Reduce<E> userFunction);
+    <R extends UserData> CollectionLike<R> map(Class<R> classR, Map<R, E> userFunction);
 }

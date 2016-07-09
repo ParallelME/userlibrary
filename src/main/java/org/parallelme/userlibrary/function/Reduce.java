@@ -8,7 +8,7 @@
 
 package org.parallelme.userlibrary.function;
 
-import org.parallelme.userlibrary.datatypes.UserData;
+import org.parallelme.userlibrary.datatype.UserData;
 
 /**
  * Interface that users must implement to produce reduction operations.

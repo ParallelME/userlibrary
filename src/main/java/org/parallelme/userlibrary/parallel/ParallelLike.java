@@ -6,16 +6,16 @@
  *
  */
 
-package org.parallelme.userlibrary.datatypes;
+package org.parallelme.userlibrary.parallel;
+
+import org.parallelme.userlibrary.datatype.UserData;
 
 /**
- * Base class for all numerical data objects.
+ * Interface that describes a parallelizable user library.
  *
- * @param <T>
- *            Type that will be used to store class data.
- *
- * @author Wilson de Carvalho.
+ * @author Wilson de Carvalho
  */
-public abstract class NumericalData<T> implements UserData<T> {
-	public T value;
+@SuppressWarnings("rawtypes")
+public interface ParallelLike<E extends UserData> {
+	ParallelOperation<E> par();
 }
