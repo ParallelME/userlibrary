@@ -9,6 +9,7 @@
 package org.parallelme.userlibrary.image;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 
 /**
  * Bitmap image processing class.
@@ -26,7 +27,9 @@ public class BitmapImage extends Image {
         for(int x = 0; x < width; x++) {
             int base = x * height;
             for(int y = 0; y < height; y++) {
-                this.pixels[base + y] = new Pixel(new RGBA(bitmap.getPixel(x, y)), x, y);
+                int pixelColor = bitmap.getPixel(x, y);
+                this.pixels[base + y] = new Pixel(new RGBA((float)Color.red(pixelColor),
+                        (float)Color.green(pixelColor), (float)Color.blue(pixelColor), 0f), x, y);
             }
         }
     }
@@ -51,7 +54,9 @@ public class BitmapImage extends Image {
         for (int x = 0; x < width; x++) {
             int base = x * height;
             for (int y = 0; y < height; y++) {
-                bitmap.setPixel(x, y, pixels[base + y].rgba.toColor());
+                RGBA rgba = pixels[base + y].rgba;
+                bitmap.setPixel(x, y, Color.argb((int) rgba.alpha, (int) rgba.red, (int) rgba.green,
+                        (int) rgba.blue));
             }
         }
     }
