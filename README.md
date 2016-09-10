@@ -10,6 +10,11 @@ ParallelME, a Parallel Mobile Engine, was designed to explore heterogeneity in A
 
 ## How to use this user-library
 
+You must understand that ParallelME User-library was built around three concepts:
+* Input-data binding: the act of providing data to one of our collections through the constructor;
+* Operations: iteration, reduction, data-transformation and filter (so far);
+* Output-data binding: the act of taking the data back from our collection and moving it to your Java regular code.
+
 In order to use ParallelME User-library to develop your applications, you must follow the steps bellow:
 
 * Download ParallelME User-library source code to your machine;
@@ -17,3 +22,172 @@ In order to use ParallelME User-library to develop your applications, you must f
 * Create your code using **precisely** the notation bellow:
 
 ```
+// Create a BitmapImage from an existing Bitmap object (input-bind)
+BitmapImage image = new BitmapImage(bitmap);
+// Iterate with foreach (operation)
+image.par().foreach(new Foreach<Pixel>() {
+  @Override
+  public void function(Pixel pixel) {
+    // Your code here. Sure you may use other name for "pixel" variable.
+    // Changes made to "pixel" variable are stored in the "image" variable after this function is executed.
+    ...
+  }
+});
+// Perform a reduction (operation)
+Pixel pixel = image.par().reduce(new Reduce<Pixel>() {
+  @Override
+  public Pixel function(Pixel p1, Pixel p2) {
+    // Your code here. Sure you may use other names for "p1" and "p2" variables.
+    // Changes made to "p1" or "p2" variables are NOT stored in the "image" variable after this 
+    // function is executed.
+    // You may make changes to "p1" or "p2", but if you want these changes to be used in the next step of the
+    // reduction, return the desired variable.
+    ...
+  }
+});
+// Perform data transformation (operation)
+Array<Float32> = image.par().map(Float32.class, new Map<Float32, Pixel>() {
+  @Override
+  public Float32 function(Pixel pixel) {
+    // Your code here. Sure you may use other name for "pixel" variable.
+    // Changes made to "pixel" variable are NOT stored in the "image" variable after this function is executed.
+    ...
+  }
+});
+// Create sub-sets (operation)
+Array<Pixel> = image.par().filter(new Filter<Pixel>() {
+  @Override
+  public boolean function(Pixel pixel) {
+    // Your code here. Sure you may use other name for "pixel" variable.
+    // Changes made to "pixel" variable are NOT stored in the "image" variable after this function is executed.
+    ...
+  }
+});
+// Get data back from a BitmapImage variable: (output-bind)
+Bitmap retVar = image.toBitmap();
+// You may also use an existing variable to get data back, but MAKE SURE the image sizes are the same:
+image.toBitmap(bitmap); // used the original "bitmap" object provided previously
+```
+
+```
+// Create an HDRImage from a byte array arranged in groups of 4 bytes for RGBA (input-bind)
+HDRImage image = new HDRImage(data, width, height);
+// Iterate with foreach (operation)
+image.par().foreach(new Foreach<Pixel>() {
+  @Override
+  public void function(Pixel pixel) {
+    // Your code here. Sure you may use other name for "pixel" variable.
+    // Changes made to "pixel" variable are stored in the "image" variable after this function is executed.
+    ...
+  }
+});
+// Perform a reduction (operation)
+Pixel pixel = image.par().reduce(new Reduce<Pixel>() {
+  @Override
+  public Pixel function(Pixel p1, Pixel p2) {
+    // Your code here. Sure you may use other names for "p1" and "p2" variables.
+    // Changes made to "p1" or "p2" variables are NOT stored in the "image" variable after this 
+    // function is executed.
+    // You may make changes to "p1" or "p2", but if you want these changes to be used in the next step of the
+    // reduction, return the desired variable.
+    ...
+  }
+});
+// Perform data transformation (operation)
+Array<Float32> = image.par().map(Float32.class, new Map<Float32, Pixel>() {
+  @Override
+  public Float32 function(Pixel pixel) {
+    // Your code here. Sure you may use other name for "pixel" variable.
+    // Changes made to "pixel" variable are NOT stored in the "image" variable after this function is executed.
+    ...
+  }
+});
+// Create sub-sets (operation)
+Array<Pixel> = image.par().filter(new Filter<Pixel>() {
+  @Override
+  public boolean function(Pixel pixel) {
+    // Your code here. Sure you may use other name for "pixel" variable.
+    // Changes made to "pixel" variable are NOT stored in the "image" variable after this function is executed.
+    ...
+  }
+});
+// Get data back from a HDRImage variable:(output-bind)
+Bitmap retVar = image.toBitmap();
+// You may also use an existing variable to get data back, but MAKE SURE the image sizes are the same:
+image.toBitmap(bitmap); // used the original "bitmap" object provided previously
+```
+
+
+```
+// Create an Array from the equivalent primitive type: (input-bind)
+// short[] for Int16
+// int[] for Int32
+// float[] for Float32
+Array<Int16> array = new Array<Int16>(primitiveTypeArray, Int16.class);
+// Iterate with foreach (operation)
+array.par().foreach(new Foreach<Int16>() {
+  @Override
+  public void function(Int16 element) {
+    // Your code here. Sure you may use other name for "pixel" variable.
+    // Changes made to "element" variable are stored in the "array" variable after this function is executed.
+    ...
+  }
+});
+// Perform a reduction (operation)
+Int16 value = array.par().reduce(new Reduce<Int16>() {
+  @Override
+  public Int16 function(Int16 e1, Int16 e2) {
+    // Your code here. Sure you may use other names for "e1" and "e2" variables.
+    // Changes made to "e1" or "e2" variables are NOT stored in the "array" variable after this
+    // function is executed.
+    // You may make changes to "e1" or "e2", but if you want these changes to be used in the next step of the
+    // reduction, return the desired variable.
+    ...
+  }
+});
+// Perform data transformation (operation)
+Array<Float32> = array.par().map(Float32.class, new Map<Float32, Int16>() {
+  @Override
+  public Float32 function(Int16 element) {
+    // Your code here. Sure you may use other name for "element" variable.
+    // Changes made to "element" variable are NOT stored in the "array" variable after this
+    // function is executed.
+    ...
+  }
+});
+// Create sub-sets (operation)
+Array<Int16> = array.par().filter(new Filter<Int16>() {
+  @Override
+  public boolean function(Int16 element) {
+    // Your code here. Sure you may use other name for "element" variable.
+    // Changes made to "element" variable are NOT stored in the "array" variable after this 
+    // function is executed.
+    ...
+  }
+});
+// Get data back from a Array variable: (output-bind)
+short[] retVar = array.toJavaArray();
+// You may also use an existing variable to get data back, but MAKE SURE the array sizes are the same:
+array.toJavaArray(primitiveTypeArray); // used the original "primitiveTypeArray" object provided previously
+```
+
+* What you can and can't do while writing those **function** methods:
+  * **Only** Java primitive types up to 32 bits are allowed, since they are mapped directly to C types during translation;
+  * The **new** operator is not supported (yet);
+  * Variables declared outside the user function scope **CAN** be used for read and write;
+  * Variables declared outside the user function scope **WITHOUT** **final** modifier will imply in sequential code translation for the given operation by ParallelME compiler. The code will be translated to sequential even though this variable is not assigned to a new value in the user function;
+  * Variables declared outside the user function scope **WITH** **final** modifier will not affect generation of parallel code by the compiler, so use them with no worries;
+  * Arrays, even though of primitive types, are **NOT** supported (yet);
+  * Strings are **NOT** supported;
+  * Method calls are **NOT** supported;
+  * Nested user functions are **NOT** allowed;
+  * Though lambda expressions (Java 8 feature) are supported in the user-library, they are **NOT** supported (yet) by ParallelME compiler, so don't use them.
+  * 
+  
+## Important notice
+
+Even though many of the limitations listed previously are syntactically allowed when writing Java code, they are not supported by ParallelME compiler. Thus, you will be perfectly able to write code, for example, using lambda expressions in Java 8 with ParallelME User-library, but our compiler won't be able to translate it. For this reason, keep an eye on these limitations and enjoy the work we are making available so far.
+
+## Detailed information
+
+If you need detailed information about ParallelME User-library, please refer to [ParallelME Reference Manual](https://parallelme.github.io/docs/ParallelME_Reference_Manual.pdf) and check the user-library section.
